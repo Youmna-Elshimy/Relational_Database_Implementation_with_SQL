@@ -1,0 +1,419 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE EMPLOYEE(
+ENUM 	 DECIMAL(12)	NOT NULL,     /* Employee number                                                              */
+FNAME	 VARCHAR(50)	NOT NULL,     /* First name                                                                   */
+INITIALS VARCHAR(5)	    NULL,     /* Initials                                                                     */
+LNAME    VARCHAR(50)    NOT NULL,     /* Last name                                                                    */
+DOB 	 DATE		    NOT NULL,     /* Date of birth                                                                */
+BLDG     DECIMAL(3) 	NOT NULL,     /* Building number                                                              */
+STREET   VARCHAR(50)	NOT NULL,     /* Street name                                                                  */
+SUBURB   VARCHAR(50)	NOT NULL,     /* Suburb name                                                                  */
+STATE	 VARCHAR(30)    NOT NULL,     /* State                                                                        */
+ZIPCODE  DECIMAL(4)	    NOT NULL,     /* Zip code                                                                     */
+SALARY   DECIMAL(9,2)   NOT NULL,     /* Salary     */
+MOBILE   VARCHAR(12)	NOT NULL,     /* Suburb name */
+EMPLOYEE_TYPE VARCHAR(10)   NOT NULL,   /* Employee type */                                                                   
+ CONSTRAINT EMPLOYEE_PKEY PRIMARY KEY(ENUM),
+ CONSTRAINT EMPLOYEE_CK1 UNIQUE KEY(FNAME,LNAME,DOB),
+ CONSTRAINT EMPLOYEE_CK2 UNIQUE KEY(MOBILE),
+ CONSTRAINT EMPLOYEE_CHECK1 CHECK (DOB <= SYSDATE() - 18),
+ CONSTRAINT EMPLOYEE_CHECK2 CHECK (BLDG > 0 AND BLDG < 1000 ),
+ CONSTRAINT EMPLOYEE_CHECK3 CHECK (STATE IN ('NSW', 'Queensland', 'Western Australia', 'Victoria', 'South Australia',
+                                            'Tasmania', 'NT', 'ACT') ), 
+ CONSTRAINT EMPLOYEE_CHECK4 CHECK (EMPLOYEE_TYPE IN ('Full Time', 'Part Time', 'Casual')),                                            
+ CONSTRAINT EMPLOYEE_CHECK5 CHECK (SALARY > 0 AND SALARY < 100000 ) ); 
+
+INSERT INTO EMPLOYEE VALUES( 1, 'John', NULL, 'Smith', '1970-11-12', 42, 'Victoria St.', 'Hurstville', 'NSW', 2456, 10000.90 ,'0412356789', 'Full Time');
+INSERT INTO EMPLOYEE VALUES( 2, 'Peter', NULL, 'Taylor', '1970-01-12', 42, 'Victoria St.', 'Hurstville', 'NSW', 2456, 12000.00,'0412356782', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 3, 'John', NULL, 'Doe', '1966-03-23', 12, 'Station St.', 'Dapto', 'NSW', 2530, 12000.00,'0412356729', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 4, 'John', NULL, 'Gray', '1988-05-05', 16, 'Station St.', 'Dapto', 'NSW', 2530, 9000.00,'0412356289', 'Casual');
+INSERT INTO EMPLOYEE VALUES( 5, 'Adam', NULL, 'Taylor', '1980-01-01', 42, 'Church St.', 'City', 'NSW', 2300, 8500.00,'0412352789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 6, 'Michael', NULL, 'Jones', '1975-03-05', 23, 'Waterloo Ave.', 'Surry Hills', 'NSW', 2502, 9500.00,'0412326789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 7, 'Frederic', NULL, 'Jones', '1983-02-28', 3, 'Victoria St.', 'Redfern', 'NSW', 2420,9600.00 ,'0412256789', 'Full Time');
+INSERT INTO EMPLOYEE VALUES( 8, 'Peter', NULL, 'O''Brien', '1983-02-28', 19, 'Lucas Dr.', 'Horsley', 'NSW', 2530, 9900.00,'0422356789', 'Part Time' );
+INSERT INTO EMPLOYEE VALUES( 9, 'John', NULL, 'Lucas', '1966-12-16', 20, 'Huxley St.', 'Horsley', 'NSW', 2530, 10000.00,'0432356789', 'Part Time' );
+INSERT INTO EMPLOYEE VALUES( 10, 'John', NULL, 'Fox', '1975-10-15', 18, 'Victoria St.', 'Hurstville', 'NSW', 2456 ,11000.00,'0413356789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 11, 'Adam', NULL, 'Fox', '1974-12-13', 45, 'Victoria St.', 'Hurstville', 'NSW', 2456, 13000.00,'0412336789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 12, 'Phillip', NULL, ',Cox', '1984-12-12', 5, 'The Avenue', 'Rockdale', 'NSW', 2300, 11500.00,'0412353789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 13, 'Andrew', 'K', 'Smith', '1969-04-04', 42, 'Bambaramba Ave.', 'Pennant Hills', 'NSW', 2556, 11200.00,'0412356389', 'Part Time' );
+INSERT INTO EMPLOYEE VALUES( 14, 'Andrew', 'R', 'Smith', '1992-04-01', 67, 'King Cr.', 'Hurstville', 'NSW', 2456, 12000.00,'0412356739', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 15, 'Michael', NULL, 'Potter', '1995-04-01', 568, 'Bong Bong St.', 'Horsley', 'NSW', 2530 , 14000.00,'0412356783', 'Part Time' );
+INSERT INTO EMPLOYEE VALUES( 16, 'Harry', NULL, 'Potter', '1995-04-01', 568, 'Bong Bong St.', 'Horsley', 'NSW', 2530, 8000.00,'0412356784', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 17, 'James', NULL, 'Bond', '1975-01-13', 007, 'Alan Bond St.', 'Perth', 'Western Australia', 6000, 9500.00,'0412356749', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 18, 'Paris', NULL, 'Hilton', '1973-10-23', 1, 'Hilton St.', 'Melbourne', 'Victoria', 3000, 9800.00,'0412356489', 'Casual' );
+INSERT INTO EMPLOYEE VALUES( 19, 'Lady', NULL, 'Gaga', '1983-12-17', 3, 'Pork St.', 'Hobart', 'Tasmania', 7000 , 1200.00,'0412354789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 20, 'Robin', NULL, 'Hood', '1983-01-10', 6, 'Nottingham Pl.', 'Sydney', 'NSW', 2000, 12500.00,'0412346789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 21, 'Andy', NULL, 'Zhu', '1981-01-12', 38, 'Ekerts Road.', 'Pokolbin', 'NSW', 2320, 5000.00,'0412456789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 22, 'Amos', NULL, 'Li', '1981-01-12', 6, 'Melbourne Place.', ' Melbourne', 'Victoria', 3000, 11000.00,'0414356789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 23, 'Andre', NULL, 'Smith', '1960-06-23', 12, 'Bendooley Street.', 'Bowral', 'NSW', 2576, 12000.00,'0442356789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 24, 'Bart', NULL, 'Zhang', '1982-03-05', 455, 'George St.', 'Sydney', 'NSW', 2000,15000.00,'0452356789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 25, 'Barton', NULL, 'Yang', '1980-01-01', 8, 'Whiteman S.', 'Melbourne', 'Victoria', 3000, 8000.05,'0415356789', 'Casual' );
+INSERT INTO EMPLOYEE VALUES( 26, 'Kyle', NULL, 'Wang', '1971-03-05', 29, ' Doggett St.', 'Newstead ', 'Queensland',  4005,9000.00,'0412556789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 27, 'Larry', NULL, 'Jones', '1983-01-03', 46, ' Spence Street.', ' Cairns City ', 'Queensland', 4870, 1300.00 ,'0412355789', 'Full Time');
+INSERT INTO EMPLOYEE VALUES( 28, 'Len', NULL, 'O''Brien', '1983-02-28', 19, 'Liverpool Street.', 'Melbourne', 'Victoria', 3000, 12000.00,'0412356589', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 29, 'Carl', NULL, 'Lucas', '1966-12-16', 36, 'Caxton St.', 'Brisbane', 'Queensland', 4000, 7000.00,'0412356759', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 30, 'Frank', NULL, 'Fox', '1972-10-15', 120, 'Seaworld Dr Main Beach.', 'Queensland', 'Queensland', 4217, 12000.60,'0412356785', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 31, 'Don', NULL, 'Fox', '1990-10-15', 6, 'Theresa Creek Rd.', 'Millaa Millaa', 'Queensland', 4886, 13000.00,'0412356786', 'Part Time' );
+INSERT INTO EMPLOYEE VALUES( 32, 'Clark', NULL, ',Cox', '1984-12-12', 179, ' Gold Coast', 'Queensland ', 'Queensland', 4220 , 11000.00,'0412356769', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 33, 'Daniel', 'K', 'Smith', '1962-04-04', 42, 'Salt Village.', 'Kingscliff', 'NSW', 2487,20000.10,'0412356689', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 34, 'Ave', 'R', 'Smith', '1991-04-01', 66, 'Bourke St.', 'Melbourne', 'Victoria', 3000, 11000.00,'0412366789', 'Casual' );
+INSERT INTO EMPLOYEE VALUES( 35,  'Edison', NULL, 'Potter', '1995-04-01', 90, 'Bong Bong St.', 'Kingscliff', 'NSW', 2487, 13000.00,'0412656789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 36,  'Gale', NULL, 'Potter', '1992-04-01', 31, 'Johnston St.', 'Stratford', 'Queensland', 4780, 11000.00,'0416356789', 'Part Time' );
+INSERT INTO EMPLOYEE VALUES( 37, 'Ivan', NULL, 'Bond', '1970-01-11', 49, ' Little Bourke Street.', 'Melbourne', 'Victoria', 3000, 9000.00,'0462356789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 38, 'Matt', NULL, 'Hilton', '1980-11-19', 86, 'Marine Pde.', 'Kingscliff', 'Western Australia', 2487,9000.00,'0472356789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 39, 'David', NULL, 'Gaga', '1973-05-19', 6, 'Orchid Avenue', 'Surfers Paradise', 'Queensland', 4780, 69999.00,'0417356789', 'Full Time' );
+INSERT INTO EMPLOYEE VALUES( 40, 'Ben', NULL, 'Franklin', '1973-11-18', 43, 'Little Bourke St.', 'Melbourne', 'Victoria', 3000, 9000.00,'0412756789', 'Casual' );
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE DRIVER(
+ENUM 	DECIMAL(12)     NOT NULL,     /* Employee number                                                               */
+LNUM 	DECIMAL(8)      NOT NULL,     /* Driving licence number                                                        */ 
+LTYPE   VARCHAR(20)	        NOT NULL,     /* Driving licence type                                                          */                                                             
+YEXP    DECIMAL(2)          NULL,     /* Years of experience                                                           */
+ CONSTRAINT DRIVER_PKEY PRIMARY KEY(ENUM),
+ CONSTRAINT DRIVER_UNIQUE UNIQUE(LNUM),
+ CONSTRAINT DRIVER_FKEY FOREIGN KEY(ENUM) REFERENCES EMPLOYEE(ENUM),
+ CONSTRAINT DRIVER_CHECK1 CHECK (LTYPE IN ('Car', 'Heavy Rigid', 'light Rigid') ),
+ CONSTRAINT DRIVER_CHECK3 CHECK (YEXP >= 0 AND YEXP <= 50) );
+
+INSERT INTO DRIVER VALUES( 1, 10001, 'Car', 10 );
+INSERT INTO DRIVER VALUES( 2, 10008, 'Heavy Rigid', 8 );
+INSERT INTO DRIVER VALUES( 3, 10002, 'Heavy Rigid',8 );
+INSERT INTO DRIVER VALUES( 4, 10004, 'Car', 10 );
+INSERT INTO DRIVER VALUES( 5, 10003, 'Heavy Rigid', 5 );
+INSERT INTO DRIVER VALUES( 6, 10012, 'Heavy Rigid', 6 );
+INSERT INTO DRIVER VALUES( 7, 20002, 'light Rigid', 10 );
+INSERT INTO DRIVER VALUES( 8, 20003, 'light Rigid', 12 );
+INSERT INTO DRIVER VALUES( 9, 30005, 'Car', 13 );
+INSERT INTO DRIVER VALUES( 10, 40002, 'light Rigid', 15 );
+INSERT INTO DRIVER VALUES( 11, 20045, 'light Rigid',6 );
+INSERT INTO DRIVER VALUES( 12, 20055, 'Car',  7 );
+INSERT INTO DRIVER VALUES( 13, 20065, 'light Rigid',  9 );
+INSERT INTO DRIVER VALUES( 14, 10305, 'Heavy Rigid', 11 );
+INSERT INTO DRIVER VALUES( 15, 10345, 'Car',  6 );
+INSERT INTO DRIVER VALUES( 16, 10705, 'light Rigid', 8 );
+INSERT INTO DRIVER VALUES( 17, 40005, 'light Rigid', 16 );
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE ADMIN(
+ENUM 	 DECIMAL(12)    NOT NULL,     /* Employee number  */
+EDUCAT   VARCHAR(50)        NULL,     /* Education */
+POSITION VARCHAR(50) 	    NULL,     /* Position */
+ CONSTRAINT ADMIN_PKEY PRIMARY KEY(ENUM),
+ CONSTRAINT ADMIN_FKEY FOREIGN KEY(ENUM) REFERENCES EMPLOYEE(ENUM) );
+
+INSERT INTO ADMIN VALUES( 18, 'Bachelor of Administration', 'Support' );
+INSERT INTO ADMIN VALUES( 19, 'Bchelor of Arts','Director' );
+INSERT INTO ADMIN VALUES( 20, 'Master of VANiness and Administration','CEO' );
+INSERT INTO ADMIN VALUES( 21,  NULL,'Manager' );
+INSERT INTO ADMIN VALUES( 22, 'HSC','Assistant manager' );
+INSERT INTO ADMIN VALUES( 23, 'Master of IT','Supervisor' );
+INSERT INTO ADMIN VALUES( 24, 'PhD in Computer Science','Administrative staff' );
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE TECHNICIAN(
+ENUM 	 DECIMAL(12)    NOT NULL,     /* Employee number      */
+SPEC     VARCHAR(50)    NOT NULL,     /* Speciality certificate       */
+ETYPE   VARCHAR(50) 	NOT NULL,     /* Type of TECHNICIAN       */
+YEXP     DECIMAL(2)         NULL,     /* Years of experience     */
+ CONSTRAINT TECHNICIAN_PKEY PRIMARY KEY(ENUM),
+ CONSTRAINT TECHNICIAN_FKEY FOREIGN KEY(ENUM) REFERENCES EMPLOYEE(ENUM),
+ CONSTRAINT TECHNICIAN_CHECK1 CHECK (YEXP >= 0 AND YEXP <= 50), 
+ CONSTRAINT TECHNICIAN_CHECK2 CHECK ( ETYPE IN ('Electrician', 'Mechanic') ) );		
+		
+INSERT INTO TECHNICIAN VALUES( 25, 'Gear', 'Mechanic', 9 );
+INSERT INTO TECHNICIAN VALUES( 26, 'Electrical System', 'Electrician', 9 );
+INSERT INTO TECHNICIAN VALUES( 27, 'Suspension', 'Mechanic', 10 );
+INSERT INTO TECHNICIAN VALUES( 28, 'Power steering', 'Mechanic', 10 );
+INSERT INTO TECHNICIAN VALUES( 29, 'Cylinders', 'Mechanic', 15 );
+INSERT INTO TECHNICIAN VALUES( 30, 'Transmission', 'Mechanic', 12 );
+INSERT INTO TECHNICIAN VALUES( 31, 'Exhaust', 'Mechanic', 13 );
+INSERT INTO TECHNICIAN VALUES( 32, 'Breaks', 'Mechanic', 9 );
+INSERT INTO TECHNICIAN VALUES( 33, 'Security', 'Mechanic', 12 );
+INSERT INTO TECHNICIAN VALUES( 34, 'Navigation', 'Mechanic', 8 );
+INSERT INTO TECHNICIAN VALUES( 35, 'Battery', 'Electrician', 11 );
+INSERT INTO TECHNICIAN VALUES( 36, 'Cruise control', 'Electrician', 13 );
+INSERT INTO TECHNICIAN VALUES( 37, 'Engine', 'Mechanic', 6 );
+INSERT INTO TECHNICIAN VALUES( 38, 'Engine', 'Mechanic', NULL );
+INSERT INTO TECHNICIAN VALUES( 39, 'Tyre Support', 'Mechanic', NULL );
+INSERT INTO TECHNICIAN VALUES( 40, 'Breaks', 'Mechanic', 17 );
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE VEHICLE(
+REGNUM 	 VARCHAR(10) 	NOT NULL,     /* Registration number                                                           */
+MANUFACT VARCHAR(30)    NOT NULL,     /* Manufacturer                                                                  */
+YMANUF   DECIMAL(4)     NOT NULL,     /* Year when manufactured  */
+STATUS 	 VARCHAR(20) 	NOT NULL,     /* Status                                                      */
+ CONSTRAINT VEHICLE_PKEY PRIMARY KEY(REGNUM),
+ CONSTRAINT VEHICLE_CHECK1 CHECK ( STATUS IN ('AVAILABLE', 'DECOMMISSIONED', 'MAINTAINED') ),
+ CONSTRAINT VEHICLE_CHECK2 CHECK ( YMANUF >= 1999 AND YMANUF <= YEAR( SYSDATE() ) ) );
+
+INSERT INTO VEHICLE VALUES( 'PKR768', 'Volvo', 2001, 'AVAILABLE'  );
+INSERT INTO VEHICLE VALUES( 'SST005', 'Iveco', 2000, 'DECOMMISSIONED' );
+INSERT INTO VEHICLE VALUES( 'QRT834', 'Tata', 2012, 'AVAILABLE' );
+INSERT INTO VEHICLE VALUES( 'LUCY01', 'Volvo', 2008, 'AVAILABLE');
+INSERT INTO VEHICLE VALUES( 'KKK007', 'Isuzu', 2005, 'MAINTAINED' );
+INSERT INTO VEHICLE VALUES( 'SYF777', 'Hyindai', 2004, 'MAINTAINED');
+INSERT INTO VEHICLE VALUES( 'PKR008', 'Volvo', 2003, 'AVAILABLE' );
+INSERT INTO VEHICLE VALUES( 'XCF003', 'Scania', 2004, 'AVAILABLE' );
+INSERT INTO VEHICLE VALUES( 'GFT008', 'Scania', 2005, 'AVAILABLE' );
+INSERT INTO VEHICLE VALUES( 'LUCY02', 'Hino', 2007, 'AVAILABLE');
+INSERT INTO VEHICLE VALUES( 'AL08UK', 'Ashok', 2008, 'AVAILABLE');
+INSERT INTO VEHICLE VALUES( 'AB0945', 'Volvo', 1999, 'AVAILABLE' );
+INSERT INTO VEHICLE VALUES( 'AB0301', 'Man', 2003, 'MAINTAINED' );
+INSERT INTO VEHICLE VALUES( 'AB0804', 'Daimler', 2008, 'AVAILABLE' );
+INSERT INTO VEHICLE VALUES( 'AB0988', 'Iveco', 2011, 'DECOMMISSIONED');
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE BUS(
+REGNUM 	 VARCHAR(10) 	NOT NULL,     /* Registration number                                                           */
+CAPACITY DECIMAL(3) 	NOT NULL,     /* Capacity                                                                      */
+ CONSTRAINT BUS_PKEY PRIMARY KEY(REGNUM),
+ CONSTRAINT BUS_FKEY FOREIGN KEY(REGNUM) REFERENCES VEHICLE(REGNUM),
+ CONSTRAINT BUS_CHECK CHECK (CAPACITY > 0 AND CAPACITY <= 80) );		 
+
+INSERT INTO BUS VALUES( 'PKR768', 50 );
+INSERT INTO BUS VALUES( 'SST005', 60 );
+INSERT INTO BUS VALUES( 'QRT834', 80 );
+INSERT INTO BUS VALUES( 'LUCY01', 50 );
+INSERT INTO BUS VALUES( 'KKK007', 45 );
+INSERT INTO BUS VALUES( 'SYF777', 45 );
+INSERT INTO BUS VALUES( 'PKR008', 80 );
+INSERT INTO BUS VALUES( 'XCF003', 60 );
+INSERT INTO BUS VALUES( 'GFT008', 45 );
+INSERT INTO BUS VALUES( 'LUCY02', 80 );
+INSERT INTO BUS VALUES( 'AL08UK', 50 );
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE VAN(
+REGNUM 	 VARCHAR(10) 	NOT NULL,     /* Registration number                                                           */
+SEATS    DECIMAL(3) 	NOT NULL,     /* Total number of seats                                                         */
+ CONSTRAINT VAN_PKEY PRIMARY KEY(REGNUM),
+ CONSTRAINT VAN_CHECK CHECK (SEATS >=5 AND SEATS <=15) );	
+
+INSERT INTO VAN VALUES( 'AB0945', 12 );
+INSERT INTO VAN VALUES( 'AB0301', 15 );
+INSERT INTO VAN VALUES( 'AB0804', 12 );
+INSERT INTO VAN VALUES( 'AB0988', 15 );
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE ROUTE(
+RNUM 	DECIMAL(10) 	      NOT NULL,     /* ROUTE number                                                                   */
+TOTAL_DISTANCE DECIMAL(6,2)   NOT NULL,
+CONSTRAINT ROUTE_PKEY PRIMARY KEY (RNUM));
+
+INSERT INTO ROUTE VALUES( 1, 1450.00);
+INSERT INTO ROUTE VALUES( 2, 1150.00);
+INSERT INTO ROUTE VALUES( 3, 1050.00);
+INSERT INTO ROUTE VALUES( 4, 550.00);
+INSERT INTO ROUTE VALUES( 5, 650.00);
+INSERT INTO ROUTE VALUES( 6, 70.00);
+INSERT INTO ROUTE VALUES( 7, 80.00);
+INSERT INTO ROUTE VALUES( 8, 1000.00);
+INSERT INTO ROUTE VALUES( 9, 200.00);
+INSERT INTO ROUTE VALUES( 10, 120.00);
+INSERT INTO ROUTE VALUES( 11, 220.00);
+INSERT INTO ROUTE VALUES( 12, 250.00);
+INSERT INTO ROUTE VALUES( 13, 550.00);
+INSERT INTO ROUTE VALUES( 14, 750.00);
+INSERT INTO ROUTE VALUES( 15, 850.00);
+INSERT INTO ROUTE VALUES( 16, 950.00);
+INSERT INTO ROUTE VALUES( 17, 1050.00);
+INSERT INTO ROUTE VALUES( 18, 250.00);
+INSERT INTO ROUTE VALUES( 19, 450.00);
+INSERT INTO ROUTE VALUES( 20, 680.00);
+INSERT INTO ROUTE VALUES( 21, 880.00);
+INSERT INTO ROUTE VALUES( 22, 250.00);
+INSERT INTO ROUTE VALUES( 23, 550.00);
+INSERT INTO ROUTE VALUES( 24, 750.00);
+INSERT INTO ROUTE VALUES( 25, 850.00);
+INSERT INTO ROUTE VALUES( 26, 950.00);
+INSERT INTO ROUTE VALUES( 27, 1050.00);
+INSERT INTO ROUTE VALUES( 28, 250.00);
+INSERT INTO ROUTE VALUES( 29, 450.00);
+INSERT INTO ROUTE VALUES( 30, 380.00);
+INSERT INTO ROUTE VALUES( 31, 480.00);
+INSERT INTO ROUTE VALUES( 32, 680.00);
+INSERT INTO ROUTE VALUES( 33, 780.00);
+
+
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE SCHEDULE(
+SNUM 	       DECIMAL(10) 	NOT NULL, /* Schedule number                                                           */
+LNUM 	       DECIMAL(8) 	NOT NULL, /* Driver licence number                                                     */
+REGNUM 	       VARCHAR(10) 	NOT NULL, /* Vehicle registration number                                               */
+START_DATE_TIME     DATETIME 		NOT NULL, /* Departure date                                                            */
+RETURN_DATE_TIME    DATETIME             NULL, /* Arrival date                                                              */
+RNUM			DECIMAL(10)  NOT NULL, 
+ CONSTRAINT SCHEDULE_PKEY PRIMARY KEY (SNUM),
+ CONSTRAINT SCHEDULE_UNIQUE UNIQUE (LNUM, REGNUM, START_DATE_TIME),
+ CONSTRAINT SCHEDULE_FKEY1 FOREIGN KEY (LNUM) REFERENCES DRIVER(LNUM),
+ CONSTRAINT SCHEDULE_FKEY2 FOREIGN KEY (REGNUM) REFERENCES VEHICLE(REGNUM),
+ CONSTRAINT SCHEDULE_FKEY3 FOREIGN KEY (RNUM) REFERENCES ROUTE(RNUM),
+ CONSTRAINT SCHEDULE_CHECK1 CHECK ( START_DATE_TIME <= SYSDATE() ),
+ CONSTRAINT SCHEDULE_CHECK2 CHECK ( RETURN_DATE_TIME <= SYSDATE() ),
+ CONSTRAINT SCHEDULE_CHECK3 CHECK ( RETURN_DATE_TIME >= START_DATE_TIME ) );
+
+INSERT INTO SCHEDULE VALUES( 1, 10001, 'PKR768', '2019-01-12 05:00:00', '2019-01-17 18:00:00',1 );
+INSERT INTO SCHEDULE VALUES( 2, 10001, 'SYF777', '2019-02-20 05:00:00', '2019-02-22 18:00',2 );
+INSERT INTO SCHEDULE VALUES( 3, 10001, 'AB0804', '2019-03-12 05:00:00', '2019-03-17 18:00:00',21 );
+INSERT INTO SCHEDULE VALUES( 4, 10001, 'PKR768', '2019-06-29 05:00:00', '2019-07-06 18:00:00',22 );
+INSERT INTO SCHEDULE VALUES( 5, 20002, 'PKR768', '2019-01-12 05:00:00', '2019-01-17 18:00:00',3 );
+INSERT INTO SCHEDULE VALUES( 6, 10002, 'SYF777', '2019-02-20 05:00:00', '2019-02-25 18:00:00',4 );
+INSERT INTO SCHEDULE VALUES( 7, 30005, 'KKK007', '2019-03-12 05:00:00', '2019-03-26 18:00:00',5 );
+INSERT INTO SCHEDULE VALUES( 8, 10001, 'AB0804', '2019-01-12 05:00:00', '2019-01-17 18:00:00',6 );
+INSERT INTO SCHEDULE VALUES( 9, 10002, 'QRT834', '2019-09-17 05:00:00', '2019-09-19 18:00:00',7 );
+INSERT INTO SCHEDULE VALUES(10, 30005, 'KKK007', '2019-12-15 05:00:00', '2019-12-25 18:00:00',8 );
+INSERT INTO SCHEDULE VALUES(11, 10003, 'SST005', '2018-01-23 05:00:00', '2018-01-29 18:00:00',9 );
+INSERT INTO SCHEDULE VALUES(12, 10002, 'PKR768', '2018-03-12 05:00:00', '2018-03-17 18:00:00',9 );
+INSERT INTO SCHEDULE VALUES(13, 20002, 'QRT834', '2019-04-23 05:00:00', '2019-04-26 18:00:00',10 );
+INSERT INTO SCHEDULE VALUES(14, 20002, 'PKR008', '2019-04-23 05:00:00', '2019-04-29 18:00:00',3 );
+INSERT INTO SCHEDULE VALUES(15, 30005, 'PKR768', '2019-05-24 05:00:00', '2019-05-29 18:00:00',3 );
+INSERT INTO SCHEDULE VALUES(16, 30005, 'SST005', '2017-08-02 05:00:00', '2017-08-17 18:00:00',4 );
+INSERT INTO SCHEDULE VALUES(17, 20002, 'QRT834', '2017-09-17 05:00:00', '2017-09-22 18:00:00',33 );
+INSERT INTO SCHEDULE VALUES(18, 10001, 'KKK007', '2017-12-15 05:00:00', '2019-12-17 18:00:00',25 );
+INSERT INTO SCHEDULE VALUES(19, 30005, 'SST005', '2018-01-23 05:00:00', '2018-01-28 18:00:00',26 );
+INSERT INTO SCHEDULE VALUES(20, 10003, 'PKR768', '2018-03-12 05:00:00', '2018-03-17 18:00:00',27 );
+INSERT INTO SCHEDULE VALUES(21, 10001, 'QRT834', '2016-04-23 05:00:00', '2016-04-28 18:00:00',24 );
+INSERT INTO SCHEDULE VALUES(22, 30005, 'PKR008', '2016-04-23 05:00:00', '2016-04-26 18:00:00',23 );
+INSERT INTO SCHEDULE VALUES(23, 10003, 'PKR768', '2016-05-25 05:00:00', '2016-05-31 18:00:00',22 );
+INSERT INTO SCHEDULE VALUES(24, 20002, 'SST005', '2016-08-02 05:00:00', '2016-08-17 18:00:00',26 );
+INSERT INTO SCHEDULE VALUES(25, 10001, 'PKR768', '2017-01-12 05:00:00', '2017-01-17 18:00:00',12 );
+INSERT INTO SCHEDULE VALUES(26, 10001, 'AB0804', '2013-02-20 05:00:00', '2013-02-26 18:00:00',12 );
+INSERT INTO SCHEDULE VALUES(27, 20002, 'KKK007', '2013-03-12 05:00:00', '2013-03-17 18:00:00',11 );
+INSERT INTO SCHEDULE VALUES(28, 30005, 'AB0804', '2010-06-29 05:00:00', '2010-07-05 18:00:00',12 );
+INSERT INTO SCHEDULE VALUES(29, 10001, 'QRT834', '2010-09-17 05:00:00', '2010-09-25 18:00:00',13 );
+INSERT INTO SCHEDULE VALUES(30, 10002, 'KKK007', '2010-12-15 05:00:00', '2010-12-17 18:00:00',14 );
+INSERT INTO SCHEDULE VALUES(31, 10003, 'SST005', '2010-01-23 05:00:00', '2010-01-29 18:00:00',15 );
+INSERT INTO SCHEDULE VALUES(32, 20002, 'PKR768', '2010-03-12 05:00:00', '2010-03-17 18:00:00',6 );
+INSERT INTO SCHEDULE VALUES(33, 30005, 'QRT834', '2003-04-23 05:00:00', '2003-05-01 18:00:00',16 );
+INSERT INTO SCHEDULE VALUES(34, 30005, 'PKR008', '2004-04-23 05:00:00', '2004-04-29 18:00:00',6 );
+INSERT INTO SCHEDULE VALUES(35, 10001, 'PKR768', '2018-05-24 05:00:00', '2018-06-03 18:00:00',14 );
+INSERT INTO SCHEDULE VALUES(36, 10002, 'SYF777', '2017-02-25 05:00:00', '2017-02-28 18:00:00',17 );
+INSERT INTO SCHEDULE VALUES(37, 30005, 'PKR008', '2017-01-23 05:00:00', '2017-01-29 18:00:00',7 );
+INSERT INTO SCHEDULE VALUES(38, 10003, 'SST005', '2018-01-10 05:00:00', '2018-01-29 18:00:00',17 );
+INSERT INTO SCHEDULE VALUES(39, 30005, 'PKR008', '2019-04-23 05:00:00', '2019-04-29 18:00:00',18 );
+INSERT INTO SCHEDULE VALUES(40, 10002, 'SYF777', '2018-02-20 05:00:00', '2018-02-25 18:00:00',19 );
+INSERT INTO SCHEDULE VALUES(41, 30005, 'PKR008', '2018-04-23 05:00:00', '2018-04-29 18:00:00',20 );
+INSERT INTO SCHEDULE VALUES(42, 10003, 'SST005', '2018-05-23 05:00:00', '2018-05-29 18:00:00',21 );
+INSERT INTO SCHEDULE VALUES(43, 10002, 'SYF777', '2017-02-20 05:00:00', '2017-02-25 18:00:00',22 );
+INSERT INTO SCHEDULE VALUES(44, 10002, 'PKR008', '2019-04-23 05:00:00', '2019-04-29 18:00:00',23 );
+INSERT INTO SCHEDULE VALUES(45, 10003, 'SST005', '2017-01-23 05:00:00', '2017-01-29 18:00:00',24 );
+INSERT INTO SCHEDULE VALUES(46, 30005, 'AB0988', '2019-04-23 05:00:00', '2019-04-29 18:00:00',25 );
+INSERT INTO SCHEDULE VALUES(47, 10002, 'AB0804', '2019-02-20 05:00:00', '2019-02-25 18:00:00',26 );
+INSERT INTO SCHEDULE VALUES(48, 40005, 'SST005', '2018-07-23 05:00:00', '2018-07-29 18:00:00',27 );
+INSERT INTO SCHEDULE VALUES(49, 10002, 'SST005', '2020-11-01 05:00:00', '2020-11-02 18:00:00',28 );
+INSERT INTO SCHEDULE VALUES(50, 10001, 'SST005', '2020-10-05 05:00:00', '2020-10-06 18:00:00',29 );
+INSERT INTO SCHEDULE VALUES(51, 20002, 'SST005', '2020-10-23 05:00:00', '2020-10-29 18:00:00',29 );
+
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE STATION(
+SNAME 	VARCHAR(50) 	NOT NULL,     /* STATION NAME                                                                   */
+ CONSTRAINT STATION_PKEY PRIMARY KEY (SNAME));
+ 
+INSERT INTO STATION VALUES('Sydney');
+INSERT INTO STATION VALUES('Melbourne');
+INSERT INTO STATION VALUES('Hobart');
+INSERT INTO STATION VALUES('Perth');
+INSERT INTO STATION VALUES('Adelaide');
+INSERT INTO STATION VALUES('Wollongong');
+INSERT INTO STATION VALUES('Newcastle');
+INSERT INTO STATION VALUES('Goulburn');
+INSERT INTO STATION VALUES('Blue Mountains');
+INSERT INTO STATION VALUES('Albury');
+INSERT INTO STATION VALUES('Liverpool');
+INSERT INTO STATION VALUES('Cairns City');
+INSERT INTO STATION VALUES('North Batemans Bay');
+INSERT INTO STATION VALUES('Newstead');
+INSERT INTO STATION VALUES('Apollo Bay');
+INSERT INTO STATION VALUES('Airlie Beach');
+INSERT INTO STATION VALUES('Brisbane');
+ 
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+CREATE TABLE ROUTE_STATION(
+RNUM 	    DECIMAL(10) 	NOT NULL,     /* Route number                                                                   */
+STOP_NUM 	DECIMAL(2) 	    NOT NULL,     /* Stop order                                                                    */
+STATION     VARCHAR(50) 	NOT NULL,     /* Departure location                                                            */
+ CONSTRAINT ROUTE_PKEY PRIMARY KEY (RNUM, STOP_NUM, STATION),
+ CONSTRAINT ROUTE_FKEY1 FOREIGN KEY (RNUM) REFERENCES ROUTE(RNUM),
+ CONSTRAINT ROUTE_FKEY2 FOREIGN KEY (STATION) REFERENCES STATION(SNAME) );
+
+INSERT INTO ROUTE_STATION VALUES( 1, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES( 1, 2, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES( 2, 1, 'Hobart');
+INSERT INTO ROUTE_STATION VALUES( 2, 2, 'Perth');
+INSERT INTO ROUTE_STATION VALUES( 3, 1, 'Adelaide');
+INSERT INTO ROUTE_STATION VALUES( 3, 2, 'Wollongong');
+INSERT INTO ROUTE_STATION VALUES( 3, 3, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES( 4, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES( 4, 2, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES( 5, 1, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES( 5, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES( 6, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES( 6, 2, 'Newcastle');
+INSERT INTO ROUTE_STATION VALUES( 6, 3, 'Brisbane');
+INSERT INTO ROUTE_STATION VALUES( 7, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES( 7, 2, 'Wollongong');
+INSERT INTO ROUTE_STATION VALUES( 8, 1, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES( 8, 2, 'Brisbane');
+INSERT INTO ROUTE_STATION VALUES( 9, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES( 9, 2, 'Brisbane');
+INSERT INTO ROUTE_STATION VALUES(10, 1, 'Wollongong');
+INSERT INTO ROUTE_STATION VALUES(10, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(11, 1, 'Brisbane');
+INSERT INTO ROUTE_STATION VALUES(11, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(12, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(12, 2, 'Wollongong');
+INSERT INTO ROUTE_STATION VALUES(12, 2, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(13, 1, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(13, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(14, 1, 'Wollongong');
+INSERT INTO ROUTE_STATION VALUES(14, 2, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(15, 1, 'Wollongong');
+INSERT INTO ROUTE_STATION VALUES(15, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(15, 3, 'Brisbane');
+INSERT INTO ROUTE_STATION VALUES(16, 1, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(16, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(17, 1, 'Perth');
+INSERT INTO ROUTE_STATION VALUES(17, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(18, 1, 'Brisbane'); 
+INSERT INTO ROUTE_STATION VALUES(18, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(19, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(19, 2, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(20, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(20, 2, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(21, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(21, 2, 'Newcastle');
+INSERT INTO ROUTE_STATION VALUES(22, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(22, 2, 'Newcastle');
+INSERT INTO ROUTE_STATION VALUES(23, 1, 'Wollongong');
+INSERT INTO ROUTE_STATION VALUES(23, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(24, 1, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(24, 2, 'Adelaide');
+INSERT INTO ROUTE_STATION VALUES(25, 1, 'Perth');
+INSERT INTO ROUTE_STATION VALUES(25, 2, 'Newstead');
+INSERT INTO ROUTE_STATION VALUES(26, 1, 'Newstead'); 
+INSERT INTO ROUTE_STATION VALUES(26, 2, 'Brisbane');
+INSERT INTO ROUTE_STATION VALUES(27, 1, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(27, 2, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(28, 1, 'Newcastle');
+INSERT INTO ROUTE_STATION VALUES(28, 2, 'Cairns City');
+INSERT INTO ROUTE_STATION VALUES(29, 1, 'Cairns City');
+INSERT INTO ROUTE_STATION VALUES(29, 2, 'Sydney');
+INSERT INTO ROUTE_STATION VALUES(30, 1, 'Airlie Beach');
+INSERT INTO ROUTE_STATION VALUES(30, 2, 'North Batemans Bay');
+INSERT INTO ROUTE_STATION VALUES(31, 1, 'Wollongong');
+INSERT INTO ROUTE_STATION VALUES(31, 2, 'North Batemans Bay');
+INSERT INTO ROUTE_STATION VALUES(32, 1, 'Melbourne');
+INSERT INTO ROUTE_STATION VALUES(32, 2, 'Apollo Bay');
+INSERT INTO ROUTE_STATION VALUES(33, 1, 'Perth');
+INSERT INTO ROUTE_STATION VALUES(33, 2, 'Apollo Bay');
+
+
+
+COMMIT;
